@@ -1,0 +1,172 @@
+<a (click)="this.goBack()">< Terug</a>
+
+<h1>Ereteken aanvragen</h1>
+<form #applicationForm = "ngForm">
+
+  <div>PERSOONLIJKE GEGEVENS</div>
+    <label for="firstname" >Voornaam:</label>
+    <input type="text" required name = "firstname" [(ngModel)] = "newApplication.firstname" placeholder="..."  pattern="[^0-9]+">
+
+    <p *ngIf="validateTextInput(newApplication.firstname!)">ongeldige invoer</p>
+
+    <label for="lastname">Achternaam:</label>
+    <input type="text" required name = "lastname" [(ngModel)] ="newApplication.lastname" placeholder="..." pattern="[^0-9]+">
+    <p *ngIf=" validateTextInput(newApplication.lastname!)">ongeldige invoer</p>
+
+    <label for="nationalnr" >Rijksregisternummer:</label>
+    <input type="text" required pattern="[0-9]{11}" name = "nationalnr" [(ngModel)] = "newApplication.nationalRegisterNr" placeholder="..."  >
+    <label for="birthdate">Geboortedatum:</label>
+    <input type="date" required name = "birthdate" [(ngModel)] = "newApplication.birthdate" placeholder="..." value="2023/11/03">
+    <label for="birthplace">Geboorteplaats:</label>
+    <input type="text" required name = "birthplace" [(ngModel)] = "newApplication.birthplace" placeholder="..." pattern="[^0-9]+" >
+
+    <p *ngIf="validateTextInput(newApplication.birthplace!)">ongeldige invoer</p>
+
+    <label for="city">Woonplaats:</label>
+
+    <input type="text" required name = "city" [(ngModel)] = "newApplication.city" placeholder="..." pattern="[^0-9]+" >
+
+    <p *ngIf="validateTextInput(newApplication.city!)">ongeldige invoer</p>
+
+    <label for="mainProfession">Hoofdberoep:</label>
+    <input type="text" required name = "mainProfession" [(ngModel)] = "newApplication.mainProfession" placeholder="..." pattern="^(?=.*[a-zA-Zéèêàùôîïç]).+$">
+    <p *ngIf="isNumberOrSpecialCharatersOnly(newApplication.mainProfession!)">ongeldige invoer</p>
+
+    <label for="jobTitle">FunctieTitel:</label>
+    <input type="text" required name = "jobTitle" [(ngModel)] = "newApplication.jobTitle" placeholder="..." pattern="^(?=.*[a-zA-Zéèêàùôîïç]).+$">
+    <p *ngIf="isNumberOrSpecialCharatersOnly(newApplication.jobTitle!)">ongeldige invoer</p>
+
+    <label for="gradeOrRank" >Graad of rang:</label>
+    <input type="text" required name = "gradeOrRank" [(ngModel)] = "newApplication.gradeOrRank" placeholder="..." pattern=".{2,50}" maxlength="50"
+    (input)="validateGradeOrRank()">
+    <p *ngIf="!validGradeOrRank">ongeldige invoer</p>
+
+    <label for="salaryScale" >Salarisschaal:</label>
+    <input type="text" required name = "salaryScale" [(ngModel)] = "newApplication.salaryScale" placeholder="..." >
+
+    <label for="initiator">Initiatiefnemer:</label>
+    <input type="text" required name = "initiator" [(ngModel)] = "newApplication.initiator"placeholder="..." pattern="[^0-9]+">
+    <p *ngIf="validateTextInput(newApplication.initiator!)">ongeldige invoer</p>
+
+    <label for="distinctionsReceived">Al ontvangen onderscheidingen:</label>
+    <input type="text" name = "distinctionsReceived" [(ngModel)] = "newApplication.distinctionsReceived"placeholder="..." pattern="^(?=.*[a-zA-Zéèêàùôîïç]).+$">
+    <p *ngIf="isNumberOrSpecialCharatersOnly(newApplication.distinctionsReceived!)">ongeldige invoer</p>
+
+    <div>MOTIVATIE</div>
+
+    <label for="resuEvaluation">Resultaat evaluaties</label>
+    <input type="text" required name = "resuEvaluation" [(ngModel)] = "newApplication.resultEvaluation" placeholder="..." pattern="^(?=.*[a-zA-Zéèêàùôîïç]).+$">
+    <p *ngIf="isNumberOrSpecialCharatersOnly(newApplication.resultEvaluation!)">ongeldige invoer</p>
+
+    <label for="sanctions">Tucht- of strafsancties:</label>
+    <input type="text" required name = "sanctions" [(ngModel)] = "newApplication.sanctions" placeholder="..." pattern="^(?=.*[a-zA-Zéèêàùôîïç]).+$">
+    <p *ngIf="isNumberOrSpecialCharatersOnly(newApplication.sanctions!)">ongeldige invoer</p>
+
+    <div>VOORSTEL</div>
+    <label for="proposedDistinction">Type ereteken: </label>
+    <select required name="proposedDistinction" [(ngModel)]="newApplication.proposedHonoraryDistinction">
+      <option value="burgerlijk ereteken">Burgerlijk ereteken</option>
+      <option value="nationale orden">Nationale orden</option>
+    </select>
+    <button id="decide" (click)="decideDistinctionBurgerlijk()">
+      Bepaal ereteken
+    </button>
+
+    <br><br>
+    <label for="institution">Bepaal voor mandataris</label>
+    <input id="institution" type="checkbox" id="institution" [checked]="mandataris" (change)="mandataris = !mandataris" (change)="this.calculateServiceTime(this.from,this.to);">
+    <br><br>
+
+    <label for="proposedDestinctionName" >Naam ereteken:</label>
+    <input type="text" required name = "proposedDestinctionName" [(ngModel)] = "newApplication.proposedHonoraryDistinctionTitle" placeholder="..."  pattern="[^0-9]+">
+
+    <p *ngIf="validateTextInput(newApplication.proposedHonoraryDistinctionTitle)">ongeldige invoer</p>
+
+    <label for="reportInvolved" >Verslag over betrokkene:</label>
+    <input type="text" required name = "reportInvolved" [(ngModel)] = "newApplication.reportAboutInvolved" placeholder="..." pattern="^(?=.*[a-zA-Zéèêàùôîïç]).+$">
+    <p *ngIf="isNumberOrSpecialCharatersOnly(newApplication.reportAboutInvolved!)">ongeldige invoer</p>
+
+    <div class="career">
+    <div>Gegevens van de loopbaan</div>
+
+    <div class="inputsCareer" >
+
+    <label>functietitel:</label>
+
+      <ng-container *ngFor="let string of grade; let i = index; trackBy: trackByFn">
+         <input type="text" [(ngModel)]="functionTitle[i]" name="functionTtitle{{i}}">
+      </ng-container>
+    </div>
+
+    <div class="inputsCareer" >
+
+    <label>graad:</label>
+
+      <ng-container *ngFor="let string of grade; let i = index; trackBy: trackByFn">
+        <input type="text" [(ngModel)]="grade[i]" name="grade{{i}}" (input)="validateGradesAsNumbers()">
+      </ng-container>
+    </div>
+    <div class="inputsCareer" >
+
+    <label>van:</label>
+
+      <ng-container *ngFor="let date of from; let i = index; trackBy: trackByFn">
+        <input type="date" [value]="from[i] | date:'yyyy-MM-dd'" (input)="from[i]=parseDate(($any($event).target.value))" (change)="this.calculateServiceTime(this.from,this.to);" />
+      </ng-container>
+
+    </div>
+
+    <div class="inputsCareer" >
+
+    <label for="tot">tot en met:</label>
+
+      <ng-container *ngFor="let date of to; let i = index; trackBy: trackByFn">
+        <input type="date" [value]="to[i] | date:'yyyy-MM-dd'" (input)="to[i]=parseDate(($any($event).target.value))" (change)="this.calculateServiceTime(this.from,this.to);"/>
+      </ng-container>
+
+    </div>
+
+    <div class="inputsCareer" >
+
+    <label for="performanceBreach">prestatiebreuk %:</label>
+
+      <ng-container *ngFor="let string of performanceBreach; let i = index; trackBy: trackByFn">
+        <input type="number" [(ngModel)]="performanceBreach[i]" name="performanceBreach{{i}}" min="0">
+      </ng-container>
+
+    </div >
+
+    <div class="inputsCareer" >
+
+    <label for="naturePerformances">aard prestaties:  </label>
+
+      <ng-container *ngFor="let string of naturePerformances; let i = index; trackBy: trackByFn">
+        <input type="text" [(ngModel)]="naturePerformances[i]" name="naturePerformances{{i}}">
+      </ng-container>
+
+    </div>
+    </div>
+    <p *ngIf="!validGrades">ongeldige graad invoer</p>
+
+  <label for="service" >31.12.{{currentPeriod.getFullYear()}} jaar dienst op:</label>
+  <input type="number" required name = "serviceYears" [(ngModel)] = "newApplication.totYearService"placeholder="..." min="0">
+  <label for="serviceYears" >jaar</label>
+  <input type="number" required name = "serviceMonths" [(ngModel)] = "newApplication.totMonthService"placeholder="..." min="0" max="11" (input)="validateServiceMonths()">
+  <label for="serviceMonths" >maanden</label><br><br>
+  <p *ngIf="invalidMonth">
+    Onjuiste maand invoer, voer een getal tussen 0 en 11 in.
+  </p>
+</form>
+
+
+
+<button (click)='createBadgeOfHonour()' #sendButton [disabled]="applicationForm.invalid" id="sendButton">Verzenden</button>
+<div class="container">
+<div class="popup" #myPopup>
+  <h2>Dankuwel!</h2>
+  <p id="popupP">Het ereteken werd succesvol aangevraagd.</p>
+<button type="button" (click)="closePopUp()">Voltooid</button>
+</div>
+</div>
+
+

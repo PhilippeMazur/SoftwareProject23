@@ -1,0 +1,31 @@
+version: '3.9'
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "443:8080"
+    depends_on:
+      - db
+
+  db:
+    build: ./db
+    environment:
+      - MYSQL_ROOT_PASSWORD=groep-8
+      - MYSQL_DATABASE=db_badge_of_honour
+      - MYSQL_USER=testuser
+      - MYSQL_PASSWORD=testpwd
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+volumes:
+  db_data:

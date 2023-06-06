@@ -1,0 +1,136 @@
+<a (click)="this.goBack()">< Terug naar overview</a>
+
+<h1>Aanvraagdocument</h1>
+<div class="informationSummarised">
+    <h2>Personalia</h2>
+    <div class="personal">
+        <div class="info-row-personal">
+            <p class="info">Voornaam :</p>
+            <p class="data">{{applicationToShow?.firstname}}</p>
+        </div>
+        <div class="info-row-personal">
+            <p class="info">Achternaam :</p>
+            <p class="data">{{applicationToShow?.lastname}}</p>
+        </div>
+        <div class="info-row-personal">
+            <p class="info">Geboortedatum :</p>
+            <p class="data">{{applicationToShow?.birthdate}}</p>
+        </div>
+        <div class="info-row-personal">
+            <p class="info">Geboorteplaats :</p>
+            <p class="data">{{applicationToShow?.birthplace}}</p>
+        </div>
+        <div class="info-row-personal">
+            <p class="info">Woonplaats :</p>
+            <p class="data">{{applicationToShow?.city}}</p>
+        </div>
+        <div class="info-row-personal">
+            <p class="info">Graadbenaming-functie :</p>
+            <p class="data">{{applicationToShow?.mainProfession}}</p>
+        </div>
+        <div class="info-row-personal">
+            <p class="info">Graad of rang  :</p>
+            <p class="data">{{applicationToShow?.gradeOrRank}}</p>
+        </div>
+        <div class="info-row-personal">
+            <p class="info">Salarisschaal  :</p>
+            <p class="data">{{applicationToShow?.salaryScale}}</p>
+        </div>
+        <div class="info-row-personal">
+            <p class="info">Initiatiefnemer :</p>
+            <p class="data">{{applicationToShow?.initiator}}</p>
+        </div>
+        <div class="info-row-personal">
+            <p class="info">Reeds bekomen onderscheideningen  :</p>
+            <p class="data">{{applicationToShow?.distinctionsReceived}}</p>
+        </div>
+    </div>
+    <h2>Loopbaan</h2>
+    <div class="career">
+        <div class="career-info">
+            <p class="career-title">Functietitel</p>
+            <p class="career-title">Graad</p>
+            <p class="career-title">Van</p>
+            <p class="career-title">Tot</p>
+            <p class="career-title">%</p>
+            <p class="career-title">Aard statuut</p>
+        </div>
+        <div class="career-data" *ngFor="let item of applicationLoopbaan">
+            <p class="data">{{item.functionTitle}}</p>
+            <p class="data">{{item.grade}}</p>
+            <p class="data">{{item.fromDate}}</p>
+            <p class="data">{{item.toDate}}</p>
+            <p class="data">{{item.performanceBreach}}</p>
+            <p class="data">{{item.naturePerformances}}</p>
+        </div>
+    </div>
+    <div class="yearService">
+        <p class="info">Totaal aantal jaren dienst op 08/04/2023 : </p>
+        <p class="data">{{applicationToShow?.totYearService + " jaar, " + applicationToShow?.totMonthService + " maanden"}}</p>
+    </div>
+    <h2>Motivatie</h2>
+    <div class="extraInfo">
+        <div class="info-row-extraInfo">
+            <p class="info">Resultaat van de laatste evaluatie :</p>
+            <p class="data">{{applicationToShow?.resultEvaluation}}</p>
+        </div>
+        <div class="info-row-extraInfo">
+            <p class="info">Tucht- en of strafsancties : </p>
+            <p class="data">{{applicationToShow?.sanctions}}</p>
+        </div>
+        <div class="info-row-extraInfo">
+            <p class="info">Tucht- en of strafsancties : </p>
+            <p class="data">{{applicationToShow?.sanctions}}</p>
+        </div>
+    </div>
+    <h2>Voorstel</h2>
+    <div class="extraInfo">
+        <div class="info-row-extraInfo">
+            <p class="info">Voorgesteld ereteken type : </p>
+            <p class="data">{{applicationToShow?.proposedHonoraryDistinction}}</p>
+        </div>
+        <div class="info-row-extraInfo">
+            <p class="info">Voorgesteld ereteken naam : </p>
+            <p class="data">{{applicationToShow?.proposedHonoraryDistinctionTitle}}</p>
+        </div>
+    </div>
+    <h2>Extra informatie</h2>
+    <div class="extraInfo">
+        <div class="info-row-extraInfo">
+            <p class="info">Goedkeuring ABB :</p>
+            <p class="data">{{applicationToShow?.approvalABBDate}}</p>
+        </div>
+        <div class="info-row-extraInfo" *ngIf="applicationToShow?.advice!= null || applicationToShow?.advice== 'onbekend'">
+            <p class="info">Advies :</p>
+            <p class="data">{{applicationToShow?.advice}}</p>
+        </div>
+        <div class="info-row-extraInfo" *ngIf="applicationToShow?.approvalMinisterDate != null">
+            <p class="info">Goedkeuring minister :</p>
+            <p class="data">{{applicationToShow?.approvalMinisterDate}}</p>
+        </div>
+        <div class="info-row-extraInfo" *ngIf="applicationToShow?.approvalPrimeMinisterDate != null">
+            <p class="info">Goedkeuring eerste minister :</p>
+            <p class="data">{{applicationToShow?.approvalPrimeMinisterDate}}</p>
+        </div>
+        <div class="info-row-extraInfo" *ngIf="applicationToShow?.approvalChancelleryDate != null">
+            <p class="info">Goedkeuring kanselarij :</p>
+            <p class="data">{{applicationToShow?.approvalChancelleryDate}}</p>
+        </div>
+        <div class="info-row-extraInfo" *ngIf="applicationToShow?.approvalKingDate != null">
+            <p class="info">Goedkeuring koning :</p>
+            <p class="data">{{applicationToShow?.approvalKingDate}}</p>
+        </div>
+        <div class="info-row-extraInfo" *ngIf="applicationToShow?.decision!= null || applicationToShow?.decision== 'onbekend'">
+            <p class="info">Besluit :</p>
+            <p class="data">{{applicationToShow?.decision}}</p>
+        </div>
+        <div class="info-row-extraInfo" *ngIf="applicationToShow?.decisionTranslated!= null || applicationToShow?.decisionTranslated== 'onbekend'">
+            <p class="info">Besluit vertaald :</p>
+            <p class="data">{{applicationToShow?.decisionTranslated}}</p>
+        </div>
+        <div>
+          Uittreksel uit het strafregister:
+          <a id="criminal-record" target=”_blank” href="http://projectvm27.p.bletchley.cloud:10079/criminal-record/{{applicationToShow?.nationalRegisterNr}}}">bekijken</a>
+        </div>
+    </div>
+</div>

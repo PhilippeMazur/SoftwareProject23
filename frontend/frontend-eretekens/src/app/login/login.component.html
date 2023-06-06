@@ -1,0 +1,20 @@
+<div class="main">
+    <div class="div-primary">
+        <div class="div-primary-content">
+            <div class="div-input">
+                <label class="email-label">Email</label>
+                <input type="text" class="input-primary" [(ngModel)]="service.email"/>
+            </div>
+            <div class="div-input">
+                <label class="password-label">Password</label>
+                <input type="password" class="input-primary" [(ngModel)]="service.password"/>
+            </div>
+            <div>
+                <button class="button-primary" (click)="Submit()">
+                    Login
+                </button>
+                <p class="p-error" *ngIf="service.throwError">E-mailadres of wachtwoord is verkeerd</p>
+            </div>
+        </div>
+    </div>
+</div>

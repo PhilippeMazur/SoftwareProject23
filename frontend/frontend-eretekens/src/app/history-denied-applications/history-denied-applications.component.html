@@ -1,0 +1,45 @@
+<link rel="stylesheet" href="history-denied-applications.component.css">
+
+<h1>Afgekeurde aanvragen</h1>
+<table border="1">
+  <tbody>
+    <tr>
+      <th>Id</th>
+      <th>Status</th>
+      <th>Naam</th>
+      <th>Datum</th>
+      <th>Actie</th>
+      <th>Commentaar</th>
+      <th></th>
+    </tr>
+    <tr *ngFor="let application of deniedApplications let i=index">
+      <ng-container>
+        <td>{{application.id}}</td>
+        <td>Afgekeurd</td>
+        <td>{{application.firstname + " " + application.lastname}}</td>
+        <td>{{application.dateCreated}}</td>
+        <td>
+          <a [routerLink]="['/view-full', application.id, currentPage]"> Bekijken </a>
+        </td>
+        <td>
+          <button (click)="toggleFold()" (click)="selectApplication(application)">Commentaar toevoegen</button>
+       </td>
+       <td>
+        <button (click)="deleteRejectedApplication(application!.id!, i)">Verwijder</button>
+     </td>
+      </ng-container>
+    </tr>
+    <ng-container class="fold-out" *ngIf="isFoldedOut == true">
+      <tr>
+        <td colspan="6">
+          <form (ngSubmit)="submitForm()">
+            <label for="comment">Commentaar: </label>
+            <input type="text" id="comment" name="comment" [(ngModel)]="comment" required (input)="checkComment()"><br>
+
+            <button type="submit">Commentaar opslaan</button>
+          </form>
+        </td>
+      </tr>
+    </ng-container>
+  </tbody>
+</table>

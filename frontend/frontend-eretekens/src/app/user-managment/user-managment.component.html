@@ -1,0 +1,24 @@
+<h1>Gebruikersbeheer</h1>
+<div class="table-wrapper">
+    <table>
+    <tbody>
+        <tr>
+            <th>Id</th>
+            <th>Email</th>
+            <th>Rol</th>
+            <th>Naam</th>
+            <th></th>
+        </tr>
+            <tr *ngFor="let user of allUsers; let i=index">
+                <td>{{i+1}}</td>
+                <td>{{user.email}}</td>
+                <td>{{roleName(user.role!)}}</td>
+                <td>{{user.firstname}} {{user.lastname}}</td>
+                <td><button (click)="RemoveUserById(user, i)">Verwijder</button></td>
+            </tr>
+        </tbody>
+</table>
+<a [routerLink]="['/user-form']">Voeg account toe</a>
+</div>
+<p *ngIf="showDeleteMessage">Kan gebruiker niet verwijderen. Er moet minstens één gebruiker overblijven.</p>
+

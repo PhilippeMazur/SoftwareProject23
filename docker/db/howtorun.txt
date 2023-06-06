@@ -1,0 +1,2 @@
+docker build -t mysql_db .
+docker run --name mysql_container -p 3306:3306 -d mysql_db

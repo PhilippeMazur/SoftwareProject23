@@ -1,0 +1,147 @@
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}/* You can add global styles to this file, and also import other style files */
+:root {
+    --themecolor-primary: #e69b1f;
+    --themecolor-secondary: #ebad4a;
+    --listitembackground: #fdfdfd;
+    --font: Flanders Art Sans, sans-serif;
+    --textcolor: #474747;
+    --hovercolor: #4480d4;
+    --highlightcolor: #e9e9e9;
+}
+
+* {
+    font-family: var(--font);
+}
+
+.title-primary {
+    font-weight: 100;
+    font-size: 1.4em;
+    color: var(--themecolor-primary);
+}
+
+
+
+.div-primary {
+    margin-inline: auto;
+    border-radius: 5px;
+    border: 2px solid black;
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-bottom: 1em;
+    width: min(90%, 30rem);
+    height: auto;
+}
+
+.input-primary {
+    margin-left: 1rem;
+}
+
+.input-primary:hover {
+    border: 2px solid var(--hovercolor);
+}
+
+.input-primary:focus {
+    outline: 0px;
+    border: 2px solid var(--hovercolor);
+}
+
+.button-primary {
+    border: none;
+    border-radius: 4px;
+    color: black;
+    background-color: var(--themecolor-primary);
+    padding: .5em;
+}
+
+.button-primary:hover {
+    background-color: var(--themecolor-secondary);
+    outline: none;
+}
+
+.select-primary {
+    padding-left: .5em;
+    width: 7rem;
+}
+
+a {
+    text-decoration: underline;
+    color: var(--themecolor-primary);
+}
+
+input[type=checkbox] {
+    transition: .5s;
+    padding-left:5px;
+    padding-right:5px;
+    border-radius:15px;
+
+    -webkit-appearance:button;
+
+    border: double 2px var(--themecolor-primary);
+
+    background-color:var(--themecolor-primary);
+    color:#FFF;
+    white-space: nowrap;
+    overflow:hidden;
+
+    width:15px;
+    height:15px;
+}
+
+input[type=checkbox]:checked {
+    background-color:#000;
+    border-left-color:var(--themecolor-primary);
+    border-right-color:var(--themecolor-primary);
+}
+
+input[type=checkbox]:hover {
+    transition: .5s;
+    box-shadow:0px 0px 10px blue;
+}

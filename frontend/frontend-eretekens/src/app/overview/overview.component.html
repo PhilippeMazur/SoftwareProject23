@@ -1,0 +1,67 @@
+<link rel="stylesheet" href="overview.component.css" />
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,500,0,200"
+/>
+<div class="filterContainer">
+  <button type="submit" (click)="changeVisibility()" id="filterOptionsButton">Filter opties +</button>
+  <div class="filter">
+  <input type="number" placeholder="Aanvraag-id" [(ngModel)]="applicationIdFilter">
+  <input type="text" placeholder="naam" [(ngModel)]="nameFilter">
+  <input type="text" placeholder="Initiatiefnemer" [(ngModel)]="initianatorFilter">
+  <label for="selectedYear">jaar: </label><select [(ngModel)]="yearFilter" name="year">
+    <option value="" disabled selected>Kies het jaar</option>
+    <option id="yearFilter" *ngFor="let year of this.yearList" [value]="year">{{year}}</option>
+  </select>
+  <label for="selectedState">status: </label><select [(ngModel)]="stateFilter">
+    <option value="" disabled selected>Kies de status</option>
+    <option *ngFor="let state of stateList" [value]="state">{{ state }}</option>
+  </select>
+  <button type="submit" (click)="filterApplicationList()" class="filterButtons">Filter</button>
+  <button type="submit" (click)="resetFiltering()" class="filterButtons">Reset</button>
+  </div>
+</div>
+<div class="sortWithTitle">
+  <select [(ngModel)]="selectedSortOption" (change)="sortApplicationList(selectedSortOption)" id="sorting">
+    <option *ngFor="let sortOption of sortList">{{ sortOption }}</option>
+  </select>
+  <p id="title">Aanvraag overzicht</p>  
+</div>
+
+
+<table border="1">
+  <tbody>
+    <tr>
+      <th>Aanvraag-id</th>
+      <th>Status</th>
+      <th>Naam</th>
+      <th>Datum</th>
+      <th>Actie</th>
+    </tr>
+        <tr *ngFor="let application of this.applicationsToShow">
+          <ng-container *ngIf= "application.state !== state.KLAAR && application.state !== state.AFGEKEURD" >
+            <td>{{application.id}}</td>
+            <td>{{stateName(application.state!)}}</td>
+            <td>{{application.firstname + " " + application.lastname}}</td>
+            <td>{{application.dateCreated}}</td>
+            <td>
+                <span class="material-symbols-outlined symbol">edit_note</span>
+                <a [routerLink]="['/view', application.id]"> Bekijken </a>
+                <br>
+                <a *ngIf="application.state == state.GOEDKEURING_1 && userRole != 'INITIATIEFNEMER'" [routerLink]="['/review', application.id]">Goedkeuren</a>
+                <a *ngIf="application.state == state.GOEDKEURING_2 && userRole != 'INITIATIEFNEMER' && userRole !='ONDERZOEKER_ABB'" [routerLink]="['/review', application.id]">Goedkeuren</a>
+                <a *ngIf="application.state == state.GOEDKEURING_3 && userRole != 'INITIATIEFNEMER' && userRole !='ONDERZOEKER_ABB'" [routerLink]="['/review', application.id]">Goedkeuren</a>
+                <a *ngIf="application.state == state.GOEDKEURING_4 && userRole != 'INITIATIEFNEMER' && userRole !='ONDERZOEKER_ABB'" [routerLink]="['/review', application.id]">Goedkeuren</a>
+                <a *ngIf="application.state == state.GOEDKEURING_5 && userRole != 'INITIATIEFNEMER' && userRole !='ONDERZOEKER_ABB'" [routerLink]="['/review', application.id]">Goedkeuren</a>
+                <a *ngIf="application.state == state.ADVIES && userRole != 'INITIATIEFNEMER' && userRole !='ONDERZOEKER_ABB'" [routerLink]="['/advice', application.id]">Advies geven</a>
+                <a *ngIf="application.state == state.BESLUIT && userRole != 'INITIATIEFNEMER' && userRole !='ONDERZOEKER_ABB'" [routerLink]="['/decision', application.id]">Besluit geven</a>
+                <a *ngIf="application.state == state.BESLUIT_VERTALEN && userRole != 'INITIATIEFNEMER' && userRole !='ONDERZOEKER_ABB'" [routerLink]="['/translation', application.id]">Besluit vertalen</a>
+                <a *ngIf="application.state == state.OORKONDE_OPMAKEN && userRole != 'INITIATIEFNEMER' && userRole !='ONDERZOEKER_ABB'" [routerLink]="['/certificate', application.id]">Oorkonde opstellen</a>
+                
+            </td>
+          </ng-container>
+        </tr>
+    </tbody>
+</table>
+
+

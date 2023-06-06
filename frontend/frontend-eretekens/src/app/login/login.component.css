@@ -1,0 +1,44 @@
+.div-input {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+    float: center;
+}
+
+label {
+    width: 5rem;
+}
+
+.p-error {
+    border-radius: 1rem;
+    font-size: .7rem;
+    color: white;
+    background-color: rgb(255, 89, 89);
+    padding-left: 1rem;
+    padding-top: .5rem;
+    height: 1.3rem;
+    width: 13rem;
+    margin-top: 1rem;
+}
+
+.div-primary {
+    background: url("vlaanderen-logo.jpg");
+    background-size: contain;
+    background-size: 250px 125px;
+
+    background-repeat: no-repeat;
+    background-position: 18.7rem center;
+
+    float: center;
+    width: 100%;
+    max-width: 550px;
+}
+
+.div-primary-content {
+    float: center;
+}
+
+.main {
+    padding: 1rem;
+}

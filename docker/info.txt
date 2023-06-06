@@ -1,0 +1,16 @@
+-Genereer een JAR voor het backend project in Intellij
+-Deze is te vinden in de target folder
+-Plaats de JAR vervolgens in ./backend/target folder van de docker omgeving
+-Plaats de .env file van target/classes/ in het spring boot project in ./backend/target/classes
+
+-Kopieer de inhoud van de root van het angular project naar ./frontend
+
+-Open de db_model.mwb file van de database in MySQL Workbench
+-Ga naar File -> export -> Forward engineer en sla het SQL bestand op onder de naam data.sql
+-Kopieer deze file naar ./db
+
+-run met: docker-compose up -d
+
+-De database is nu berijkbaar op poort 3306 met username root en password groep-8
+-De backkend is nu berijkbaar op poort 8080
+-De frontend is nu berijkbaar op poort 80 (standaardpoort voor http dus hoeft niet ingevuld te worden)

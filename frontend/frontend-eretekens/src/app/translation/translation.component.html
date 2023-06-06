@@ -1,0 +1,14 @@
+<body>
+    <a routerLink="/home">Back</a>
+    <div class="decisionTextBox">
+        <div class="decisionText">
+            <p>{{applicationToShow?.decision}}</p>
+        </div>
+    </div>
+
+    <div class="decisionBox">
+        <label>Besluit: <textarea class="input-primary" [(ngModel)]="translation" id="decision" rows="5" cols="40"></textarea></label>
+        <br>
+        <button type="submit" class="button-primary" [disabled]="!translation" (click)="postTranslatedDecision(translation)">Voltooien</button>
+    </div> 
+</body>

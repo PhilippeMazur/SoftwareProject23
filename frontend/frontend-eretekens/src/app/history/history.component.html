@@ -1,0 +1,30 @@
+<link rel="stylesheet" href="history.component.css" />
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,500,0,200"
+/>
+
+<h1>Afgewerkte aanvragen</h1>
+<table border="1">
+  <tbody>
+    <tr>
+      <th>Id</th>
+      <th>Status</th>
+      <th>Naam</th>
+      <th>Datum</th>
+      <th>Actie</th>
+    </tr>
+        <tr *ngFor="let application of DB.applications">
+          <ng-container *ngIf="application.state == state.KLAAR">
+            <td>{{application.id}}</td>
+            <td>Klaar</td>
+            <td>{{application.firstname + " " + application.lastname}}</td>
+            <td>{{application.dateCreated}}</td>
+            <td>
+                <a [routerLink]="['/view-full', application.id, currentPage]"> Bekijken </a>
+            </td>
+          </ng-container>
+        </tr>
+    </tbody>
+</table>
+

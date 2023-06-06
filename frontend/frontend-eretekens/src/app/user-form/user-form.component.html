@@ -1,0 +1,26 @@
+<a (click)="this.goBack()">< Terug naar gebruikersbeheer</a>
+
+<h1>Gebruiker toevoegen</h1>
+<div class="table-wrapper">
+<form (ngSubmit)="OnSubmit()" #applicationForm = "ngForm">
+    <label for="email">E-mail:</label>
+    <input required type="email" id="email" name="email" [(ngModel)]="newUser.email" (input)="ValidateEmail()"
+    email #userEmail="ngModel">
+    <p *ngIf="showErrorEmailMessage ">Email is al in gebruik</p>
+    <p *ngIf="!emailIsValid && newUser.email != ''" >Email is ongeldig</p>
+    <label for="password">Password:</label>
+    <input required type="password" id="password" name="password" [(ngModel)]="newUser.password"><br><br>
+    <label for="role">Rol:</label>
+    <select required id="role" name="role" [(ngModel)]="newUser.role">
+      <option *ngFor="let role of roles.sort()" [value]="role">{{ role }}</option>
+    </select>
+    <label for="firstname">firstname:</label>
+    <input required type="firstname" id="firstname" name="firstname" [(ngModel)]="newUser.firstname"><br><br>
+    <label for="lastname">lastname:</label>
+    <input required type="lastname" id="lastname" name="lastname" [(ngModel)]="newUser.lastname"><br><br>
+    <button  type="submit" [disabled]="buttonDisabled()" #createButton id="createButton">Submit</button>
+  </form>
+</div>
+<p id="notComplete" *ngIf="showNotCompleteMessage">Vul alle gegevens in</p>
+<p id="created" *ngIf="showUserCreatedMessage">Gebruiker succesvol aangemaakt!</p>
+

@@ -1,0 +1,38 @@
+
+    <app-view></app-view> 
+    <h2>Oorkonde opstellen</h2>
+<form #certificateForm = "ngForm" class="centered-form">       
+    <div class="spaced-lines">
+        <p>De minister-president van de Vlaamse Regering</p> 
+        <p>heeft de eer de
+            <select required [(ngModel)]= "newCertificate.genderApplicant"  name="genderApplicant" >
+                <option value="man">heer</option>
+                <option value="woman">mevrouw</option>             
+             </select>
+            <strong> {{application.firstname}} {{application.lastname}}</strong>,</p> 
+        <p>{{application.jobTitle}} bij het 
+            <select required [(ngModel)]= "newCertificate.jobTitleOption" name="jobTitleOption" >
+            <option value="G">G</option>
+            <option value="O">O</option> 
+            <option value="P">P</option>                         
+         </select> van <input required type="text" name="management" id=""[(ngModel)]= "newCertificate.management" placeholder="bestuur">, te melden dat </p>
+         <p>bij besluit van 1 de Koning 
+            <ng-container *ngIf="newCertificate.genderApplicant === 'man'; else genderWoman">hem</ng-container>
+            <ng-template #genderWoman>haar</ng-template>
+        </p>    
+        <p>de <strong> {{application.proposedHonoraryDistinction}}</strong>, ingesteld bij de koninklijke</p> 
+        <p>besluiten van 21 juli 1867 en van 15 januari 1885,</p> 
+        <p>toegekend heeft als beloning voor de goede en trouwe</p> 
+        <p>diensten door 
+            <ng-container *ngIf="newCertificate.genderApplicant === 'man'; else genderWoman">hem</ng-container>
+            <ng-template #genderWoman>haar</ng-template>
+        ruim <strong>{{application.totYearService}}</strong>  jaren aan het land bewezen.</p>
+    </div>
+    <div class="ministerInformation">
+    <p id="nameMinister">Jan Jambon</p>
+    <p id="ministerText">Vlaamse minister-president</p>         
+    </div>
+   
+</form>
+
+<button (click)="submitCertificate()" #sendCertificate [disabled]="certificateForm.invalid" id="sendCertificate" class="custom-button">Verzend</button>

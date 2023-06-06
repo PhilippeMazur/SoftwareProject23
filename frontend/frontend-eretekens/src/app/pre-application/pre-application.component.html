@@ -1,0 +1,12 @@
+<h1>Ereteken aanvragen</h1>
+
+<form #preApplicationForm = "ngForm" >
+
+    <p>VUL DE NODIGE GEGEVENS IN</p>
+
+    <label for="nationalRegisterNr" >Rijksregisternummer:</label>
+    <input type="text" required pattern="[0-9]{11}" name = "nationalRegisterNr" [(ngModel)] = "nationalRegisterNr" placeholder="..."  >
+
+    <button (click)='NextStep()' #sendButton [disabled]="preApplicationForm.invalid" id="nextButton">Verder</button>
+</form>
+

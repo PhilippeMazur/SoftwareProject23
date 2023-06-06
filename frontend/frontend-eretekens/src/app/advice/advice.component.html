@@ -1,0 +1,9 @@
+<body>
+    <app-view></app-view>
+
+    <div class="adviceBox">
+        <label>Advies: <textarea class="input-primary" [(ngModel)]="advice" id="advice" rows="5" cols="40"></textarea></label>
+        <br>
+        <button type="submit" class="button-primary" [disabled]="!advice" (click)="postAdvice(advice)">Voltooien</button>
+    </div> 
+</body>

@@ -1,0 +1,49 @@
+<link rel="stylesheet" href="profile.component.css" />
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,500,0,200"
+/>
+
+<h1>Profiel</h1>
+<table border="1">
+  <tbody>
+    <tr>
+        <th>Email</th>
+        <th>Rol</th>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Actie</th>
+    </tr>
+    <tr>
+        <td>{{DB.email}}</td>
+        <td>{{DB.role}}</td>
+        <td>{{DB.firstname}}</td>
+        <td>{{DB.lastname}}</td>
+        <td>
+            <button (click)="toggleFold()">Wachtwoord wijzigen</button>
+        </td>
+    </tr>
+    <ng-container class="fold-out" *ngIf="isFoldedOut == true">
+        <tr>
+            <td colspan="5">
+                <form (ngSubmit)="submitForm()">
+                    <label for="oldPassword">Oud wachtwoord: </label>
+                    <input type="password" id="oldPassword" name="oldPassword" [(ngModel)]="password" required (input)="checkNewPassword()"><br>
+
+                    <label for="newPassword">Nieuw wachtwoord: </label>
+                    <input type="password" id="newPassword" name="newPassword" [(ngModel)]="newPassword" required (input)="checkNewPassword()"><br>
+                    <p *ngIf="!validNewPassword">Nieuw wachtwoord mag niet gelijk zijn aan oud wachtwoord</p>
+
+                    <label for="newPasswordRepeat">Herhaal nieuw wachtwoord: </label>
+                    <input type="password" id="newPasswordRepeat" name="newPasswordRepeat" [(ngModel)]="newPasswordRepeat" required (input)="checkRepeat()"><br>
+                    <p *ngIf="!validNewPasswordRepeat">Nieuw wachtwoord moet in beide velden gelijk zijn</p>
+                
+                    <button type="submit">Wachtwoord wijzigen</button>
+                </form>
+
+            </td>
+        </tr>
+    </ng-container>
+    </tbody>
+</table>
+

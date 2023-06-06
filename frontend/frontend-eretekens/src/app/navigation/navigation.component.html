@@ -1,0 +1,24 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">
+
+
+<body>
+    <div class="navigation">
+        <img src="../../assets/vlaanderen-logo-removebg-preview.png" alt="">
+        <ul>
+            <li class="li-login"><a routerLink="/login" (click)="refreshSession()">Logout</a></li>
+            <li class="li-overview"><a routerLink="/overview">Overview</a></li>
+            <li class="li-application" *ngIf="getUserRole() == 'INITIATIEFNEMER' || getUserRole() == 'DEVELOPER'" ><a routerLink="/pre-application">Nieuw ereteken aanvragen</a></li>
+            <li class="li-usermanagment" *ngIf="getUserRole() == 'DEVELOPER'" ><a routerLink="/user-managment">Gebruikersbeheer</a></li>
+            <li class="li-history" *ngIf="getUserRole() == 'DEVELOPER' || 'INITIATIEFNEMER'" ><a routerLink="/history">Voltooide aanvragen</a></li>
+            <li class="li-history" *ngIf="getUserRole() == 'DEVELOPER' || 'INITIATIEFNEMER'" ><a routerLink="/history-denied-applications">Afgekeurde aanvragen</a></li>
+            <li class="li-profile"><a routerLink="/profile">
+            Profiel <img class="profile-img"src="../../assets/profile.png" alt="">
+            </a></li>
+        </ul>
+    </div>
+    <div class="dashboard">
+        <router-outlet></router-outlet>
+    </div>
+</body>

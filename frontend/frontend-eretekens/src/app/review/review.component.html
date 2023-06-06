@@ -1,0 +1,13 @@
+
+<app-view></app-view>
+
+<div class="approval">
+  <div>
+    <label  for="approval">Ik bevestig dat ik dit document <b>wel</b> heb goedgekeurd.</label>
+    <input [(ngModel)]="approve" type="checkbox" id="approval" [disabled]="(reject)">
+    <br>
+    <label  for="approval2">Ik bevestig dat ik dit document <b>niet</b> heb goedgekeurd.</label>
+    <input [(ngModel)]="reject" type="checkbox" id="approval2" [disabled]="(approve)">
+  <br>
+  <button [disabled]="(!approve && !reject)" class="button-primary" (click)='acceptApplication(approve)'>Versturen</button>
+</div>  
